@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import { BotMessageSquare } from "lucide-react";
 import WithSubnavigation from "@/components/navbar";
 import SimpleSidebar from "@/components/sidebar";
-
-const inter = Inter({ subsets: ["latin"] });
+import WidgetLayout from "@/components/WidgetLayout";
+import Copilot from "@/components/Copilot";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       </Head>
       <WithSubnavigation />
       <SimpleSidebar>
+        <Copilot />
       </SimpleSidebar>
     </>
   );

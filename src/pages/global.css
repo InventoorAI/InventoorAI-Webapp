@@ -1,0 +1,13 @@
+* {
+  font-family: var(--font-nunito);
+}
+
+#scrollbar::-webkit-scrollbar {
+  width: 12px;
+  background-color: #369f9e;
+}
+
+#scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #96d2d1;
+}

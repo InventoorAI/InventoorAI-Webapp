@@ -8,9 +8,15 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-export default function WidgetLayout({ icon, title, children, setting, w }) {
+export default function WidgetLayout({
+  icon,
+  title,
+  children,
+  setting,
+  ...style
+}) {
   return (
-    <Accordion allowMultiple w={w}>
+    <Accordion allowMultiple {...style} bg="white" borderWidth={0}>
       <AccordionItem>
         <h2>
           <AccordionButton>

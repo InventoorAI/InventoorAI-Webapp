@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Flex,
@@ -6,25 +6,23 @@ import {
   useColorModeValue,
   Link,
   Text,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
-import { LayoutDashboard, Package, Terminal } from 'lucide-react';
+import { LayoutDashboard, Package, Terminal } from "lucide-react";
 
 const LinkItems = [
-  { name: 'Dashboard', icon: LayoutDashboard},
-  { name: 'Package', icon: Package},
-  { name: 'Console', icon: Terminal},
+  { name: "Dashboard", icon: LayoutDashboard },
+  { name: "Package", icon: Package },
+  { name: "Console", icon: Terminal },
 ];
 
 export default function SimpleSidebar({ children }) {
   return (
     <Box bgColor={"#00AFAC"} minH="100vh">
-      <SidebarContent
-        display={{ base: 'none', md: 'block' }}
-      />
+      <SidebarContent display={{ base: "none", md: "block" }} />
       {/* mobilenav */}
-      <MobileNav display={{ base: 'flex', md: 'none' }} />
-      <Box>
+      <MobileNav display={{ base: "flex", md: "none" }} />
+      <Box ml={20} p={5}>
         {children}
       </Box>
     </Box>
@@ -34,14 +32,15 @@ export default function SimpleSidebar({ children }) {
 const SidebarContent = ({ ...rest }) => {
   return (
     <Flex
-      bg={'#177472'}
-      w={{ base: 'full', md: 20 }}
+      bg={"#177472"}
+      w={{ base: "full", md: 20 }}
       pos="fixed"
       h="full"
-      direction={'column'}
-      alignItems={'center'}
-      justifyContent={'center'}
-      {...rest}>
+      direction={"column"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      {...rest}
+    >
       {LinkItems.map((link) => (
         <NavItem key={link.name} icon={link.icon} />
       ))}
@@ -51,7 +50,11 @@ const SidebarContent = ({ ...rest }) => {
 
 const NavItem = ({ icon }) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link
+      href="#"
+      style={{ textDecoration: "none" }}
+      _focus={{ boxShadow: "none" }}
+    >
       <Flex
         align="center"
         justifyContent="center"
@@ -61,16 +64,16 @@ const NavItem = ({ icon }) => {
         color="white"
         cursor="pointer"
         _hover={{
-          bg: 'rgba(255, 255, 255, 0.20)',
-          color: 'white',
-          borderRadius: 'none'
+          bg: "rgba(255, 255, 255, 0.20)",
+          color: "white",
+          borderRadius: "none",
         }}
-        >
+      >
         {icon && (
           <Icon
             fontSize="x-large"
             _groupHover={{
-              color: 'white',
+              color: "white",
             }}
             as={icon}
           />
@@ -87,13 +90,13 @@ const MobileNav = ({ ...rest }) => {
       px={{ base: 4, md: 24 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
+      bg={useColorModeValue("white", "gray.900")}
       justifyContent="flex-start"
-      {...rest}>
+      {...rest}
+    >
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
         Logo
       </Text>
     </Flex>
   );
 };
-
