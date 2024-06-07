@@ -34,8 +34,7 @@ const SidebarContent = ({ ...rest }) => {
     <Flex
       bg={"#177472"}
       w={{ base: "full", md: 20 }}
-      pos="fixed"
-      h="full"
+      h="100vh"
       direction={"column"}
       alignItems={"center"}
       justifyContent={"center"}

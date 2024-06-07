@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
         `}
       </style>
       <ChakraProvider>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </ChakraProvider>
     </>
   );
