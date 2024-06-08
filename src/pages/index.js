@@ -6,6 +6,7 @@ import { Flex, VStack } from "@chakra-ui/react";
 import Humidity from "@/components/Humidity";
 import Temperature from "@/components/Temperature";
 import WebCam from "@/components/WebCam";
+import Inventory from "@/components/Inventory";
 
 export default function Home() {
   return (
@@ -19,6 +20,9 @@ export default function Home() {
       <WithSubnavigation />
       <SimpleSidebar>
         <Flex gap="10px">
+          <VStack w="400px">
+            <Inventory w="100%" />
+          </VStack>
           <VStack w="400px">
             <WebCam w="100%" />
             <Temperature w="100%" />
