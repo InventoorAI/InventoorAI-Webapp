@@ -18,7 +18,7 @@ const LinkItems = [
 
 export default function SimpleSidebar({ children }) {
   return (
-    <Box bgColor={"#00AFAC"} minH="100vh">
+    <Box bgColor={"#00AFAC"} minH="100vh" display={'flex'} flexDir={'row'}>
       <SidebarContent display={{ base: "none", md: "block" }} />
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} />
