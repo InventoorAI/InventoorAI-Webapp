@@ -10,6 +10,7 @@ import {
 import { BotMessageSquare, SendHorizonal } from "lucide-react";
 import WidgetLayout from "./WidgetLayout";
 import Message from "./Message";
+import { v4 } from "uuid";
 
 export default function Copilot({ ...style }) {
   const messages = [
@@ -34,15 +35,15 @@ export default function Copilot({ ...style }) {
         <Flex
           gap="11px"
           direction={"column"}
-          px="10px"
+          px="20px"
           py="20px"
-          h="500px"
+          h="595px"
           w="100%"
           overflowY={"scroll"}
           id="scrollbar"
         >
           {messages.map((msg) => (
-            <Message who={msg.who} message={msg.msg} />
+            <Message key={v4()} who={msg.who} message={msg.msg} />
           ))}
         </Flex>
         <InputGroup pb="10px" pt="0" px="20px">

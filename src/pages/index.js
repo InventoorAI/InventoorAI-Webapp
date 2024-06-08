@@ -21,16 +21,16 @@ export default function Home() {
       <WithSubnavigation />
       <SimpleSidebar>
         <Flex gap="20px" flexDir={{ base: "column", md: "row" }} justifyContent="center">
-          <VStack w="400px">
+          <VStack w={{ base: "380px", md: "400px" }} gap="20px">
             <Inventory w="100%" />
-            <Control w="400px" />
+            <Control w="100%" />
           </VStack>
-          <VStack w="400px">
+          <VStack w={{ base: "380px", md: "400px" }} gap="20px">
             <WebCam w="100%" />
             <Temperature w="100%" />
             <Humidity w="100%" />
           </VStack>
-          <VStack w={{ base: "400px", md: "500px" }}>
+          <VStack w={{ base: "380px", md: "500px" }} gap="20px">
             <Copilot w="100%" />
           </VStack>
         </Flex>

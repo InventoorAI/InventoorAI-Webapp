@@ -16,7 +16,7 @@ export default function WidgetLayout({
   ...style
 }) {
   return (
-    <Accordion allowMultiple {...style} bg="white" borderWidth={0}>
+    <Accordion allowMultiple {...style} bg="white" borderWidth={0} border="none" borderColor="#00AFAC" borderRadius="lg">
       <AccordionItem>
         <h2>
           <AccordionButton>
