@@ -13,16 +13,19 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  IconButton
 } from '@chakra-ui/react';
 import {
   ChevronDownIcon,
   ChevronRightIcon,
+  HamburgerIcon,
   WarningIcon,
+  CloseIcon
 } from '@chakra-ui/icons';
-import { Settings, Bell, PackageOpen } from 'lucide-react';
+import { Settings, Bell, PackageOpen, LayoutDashboard, Package, Terminal } from 'lucide-react';
 
 export default function WithSubnavigation() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure()
 
   return (
     <Box w={'full'}>
@@ -34,7 +37,21 @@ export default function WithSubnavigation() {
         pr={{ base: 4 }}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
+        justifyContent={{ base: "space-between", md: "start" }}
         align={'center'}>
+        <Flex display={{ base: "block", md: "none" }} mx={5}>
+          <IconButton
+            display={{ base: "block", md: "none" }}
+            onClick={onToggle}
+            icon={
+              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+            }
+            color="white"
+            fontSize={"x-large"} 
+            variant={'ghost'}
+            aria-label={'Toggle Navigation'}
+          />
+        </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} ml={5} gap={2} alignItems="center">
           <PackageOpen />
           <Text
@@ -206,8 +223,9 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg="#54CBC9"
       p={4}
+      color="white"
       display={{ md: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
@@ -216,7 +234,7 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }) => {
+const MobileNavItem = ({ label, children, href, icon }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -225,14 +243,16 @@ const MobileNavItem = ({ label, children, href }) => {
         py={2}
         as={Link}
         href={href ?? '#'}
-        justify={'space-between'}
+        justify={'center'}
         align={'center'}
+        gap={2}
         _hover={{
           textDecoration: 'none',
         }}>
+        <Icon as={icon} />
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color="white">
           {label}
         </Text>
         {children && (
@@ -267,44 +287,51 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
+//  {
+//    label: 'item 1',
+//    children: [
+//      {
+//        label: 'Explore Design Work',
+//        subLabel: 'Trending Design to inspire you',
+//        href: '#',
+//      },
+//      {
+//        label: 'New & Noteworthy',
+//        subLabel: 'Up-and-coming Designers',
+//        href: '#',
+//      },
+//    ],
+//  },
+//  {
+//    label: 'item 2',
+//    children: [
+//      {
+//        label: 'Job Board',
+//        subLabel: 'Find your dream design job',
+//        href: '#',
+//      },
+//      {
+//        label: 'Freelance Projects',
+//        subLabel: 'An exclusive list for contract work',
+//        href: '#',
+//      },
+//    ],
+//  },
   {
-    label: 'item 1',
-    children: [
-      {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
-        href: '#',
-      },
-      {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'item 2',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'item 3',
+    label: 'dashboard',
+    icon: LayoutDashboard,
     href: '#',
   },
   {
-    label: 'item 4',
+    label: 'packages',
+    icon: Package,
     href: '#',
   },
+  {
+    label: 'console',
+    icon: Terminal,
+    href: '#'
+  }
 ];
 
 

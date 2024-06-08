@@ -21,8 +21,8 @@ export default function SimpleSidebar({ children }) {
     <Box bgColor={"#00AFAC"} minH="100vh" display={'flex'} flexDir={'row'}>
       <SidebarContent display={{ base: "none", md: "block" }} />
       {/* mobilenav */}
-      <MobileNav display={{ base: "flex", md: "none" }} />
-      <Box ml={20} p={5}>
+      <MobileNav display={{ base: "none", md: "none" }} />
+      <Box mt={5} w="full" display="flex" justifyContent="center" p={5}>
         {children}
       </Box>
     </Box>
@@ -83,19 +83,4 @@ const NavItem = ({ icon }) => {
 };
 
 const MobileNav = ({ ...rest }) => {
-  return (
-    <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
-      height="20"
-      alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
-      justifyContent="flex-start"
-      {...rest}
-    >
-      <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
-      </Text>
-    </Flex>
-  );
 };

@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
       <WithSubnavigation />
       <SimpleSidebar>
-        <Flex gap="10px">
+        <Flex gap="20px" flexDir={{ base: "column", md: "row" }} justifyContent="center">
           <VStack w="400px">
             <Inventory w="100%" />
             <Control w="400px" />
@@ -30,7 +30,7 @@ export default function Home() {
             <Temperature w="100%" />
             <Humidity w="100%" />
           </VStack>
-          <VStack w="500px">
+          <VStack w={{ base: "400px", md: "500px" }}>
             <Copilot w="100%" />
           </VStack>
         </Flex>
