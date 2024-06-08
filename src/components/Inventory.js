@@ -15,30 +15,21 @@ import { v4 } from "uuid";
 import Item from "@/../public/InventoryItem.png"
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { io } from "socket.io-client";
 import axios from "axios";
+
+const socket = io(`ws://192.168.31.155:3000`)
 
 export default function Inventory({ ...style }) {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await axios.get('http://192.168.145.251:3000/api/items', {
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-        console.log(response);
-        const result = await response.json()
-        console.log(result)
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchItems()
+    socket.on('findAllItems', (data) => {
+      console.log(data)
+      setItems(data)
+    })
   }, [])
+
 
   return (
     <WidgetLayout icon={<Boxes />} title={"Inventory"} {...style}>
@@ -57,7 +48,7 @@ export default function Inventory({ ...style }) {
 
         <TabPanels bg="#54cbc9">
           <TabPanel overflowY="scroll" maxHeight="22vh" py={0}>
-            {items.map((data) => (
+            {Object.keys(items).map((data) => (
               <Box py={2} borderBottomWidth="1px" overflow="hidden" w={'full'} h={'70px'} key={v4()} display={'flex'} flexDir={'row'} gap={2} color={'white'}>
                 <Image src={Item} alt="item image" />
                 <Flex flexDir="column" justifyContent={"space-between"}>
