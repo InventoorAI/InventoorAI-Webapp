@@ -27,8 +27,8 @@ export default function Home() {
           </VStack>
           <VStack w={{ base: "380px", md: "400px" }} gap="20px">
             <WebCam w="100%" />
-            <Temperature w="100%" />
-            <Humidity w="100%" />
+            <Temperature w="100%" p={5} />
+            <Humidity w="100%" p={5} />
           </VStack>
           <VStack w={{ base: "380px", md: "500px" }} gap="20px">
             <Copilot w="100%" />

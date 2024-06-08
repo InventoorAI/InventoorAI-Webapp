@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 export default function WebCam({ ...style }) {
   useEffect(() => {
-    const socket = io('ws://192.168.145.251:3000')
+    const socket = io(process.env.NEXT_PUBLIC_WEBSOCKET_URL)
 
     socket.on('mjpeg-stream', (chunk) => {
       const img = document.getElementById('mjpeg-stream');
