@@ -7,6 +7,7 @@ import Humidity from "@/components/Humidity";
 import Temperature from "@/components/Temperature";
 import WebCam from "@/components/WebCam";
 import Inventory from "@/components/Inventory";
+import Control from "@/components/Control";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <Flex gap="10px">
           <VStack w="400px">
             <Inventory w="100%" />
+            <Control w="400px" />
           </VStack>
           <VStack w="400px">
             <WebCam w="100%" />

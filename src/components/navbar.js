@@ -43,7 +43,7 @@ export default function WithSubnavigation() {
             fontSize={'large'}
             fontWeight={'bold'}
             ml={5}>
-            Hackathon
+            InventoorAI
           </Text>
 
           {/*<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
