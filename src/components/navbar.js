@@ -19,7 +19,7 @@ import {
   ChevronRightIcon,
   WarningIcon,
 } from '@chakra-ui/icons';
-import { Settings, Bell } from 'lucide-react';
+import { Settings, Bell, PackageOpen } from 'lucide-react';
 
 export default function WithSubnavigation() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -35,17 +35,26 @@ export default function WithSubnavigation() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} ml={5} gap={2} alignItems="center">
+          <PackageOpen />
           <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={'white'}
             fontSize={'large'}
             fontWeight={'bold'}
-            ml={5}>
+          >
             InventoorAI
           </Text>
-
+          <Text
+            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            fontFamily={'Dosis'}
+            color={'white'}
+            fontSize={'medium'}
+            fontWeight={'bold'}
+          >
+            v1.0.0
+          </Text>
           {/*<Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>*/}
