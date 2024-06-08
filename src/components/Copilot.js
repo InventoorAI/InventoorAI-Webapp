@@ -11,7 +11,7 @@ import { BotMessageSquare, SendHorizonal } from "lucide-react";
 import WidgetLayout from "./WidgetLayout";
 import Message from "./Message";
 
-export default function Copilot() {
+export default function Copilot({ ...style }) {
   const messages = [
     { who: "human", msg: "Hello." },
     { who: "ai", msg: "Hello John Doe! How may I help you today?" },
@@ -29,7 +29,7 @@ export default function Copilot() {
   ];
 
   return (
-    <WidgetLayout title={"Copilot"} icon={<BotMessageSquare />} w="500px">
+    <WidgetLayout title={"Copilot"} icon={<BotMessageSquare />} {...style}>
       <Box bg="#54cbc9">
         <Flex
           gap="11px"

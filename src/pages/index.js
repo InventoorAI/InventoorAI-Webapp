@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
-import { BotMessageSquare } from "lucide-react";
 import WithSubnavigation from "@/components/navbar";
 import SimpleSidebar from "@/components/sidebar";
-import WidgetLayout from "@/components/WidgetLayout";
 import Copilot from "@/components/Copilot";
+import { Flex, VStack } from "@chakra-ui/react";
+import Humidity from "@/components/Humidity";
+import Temperature from "@/components/Temperature";
+import WebCam from "@/components/WebCam";
 
 export default function Home() {
   return (
@@ -17,7 +18,16 @@ export default function Home() {
       </Head>
       <WithSubnavigation />
       <SimpleSidebar>
-        <Copilot />
+        <Flex gap="10px">
+          <VStack w="400px">
+            <WebCam w="100%" />
+            <Temperature w="100%" />
+            <Humidity w="100%" />
+          </VStack>
+          <VStack w="500px">
+            <Copilot w="100%" />
+          </VStack>
+        </Flex>
       </SimpleSidebar>
     </>
   );
