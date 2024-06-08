@@ -1,6 +1,5 @@
-import Copilot from "@/components/Copilot";
+import Control from "@/components/Control";
 import { HStack, Box } from "@chakra-ui/react";
-import Humidity from "@/components/Humidity";
 
 export default function Test() {
   return (
@@ -11,7 +10,7 @@ export default function Test() {
       p="100px"
       gap="10px"
     >
-      <Humidity />
+      <Control w="400px" />
     </HStack>
   );
 }

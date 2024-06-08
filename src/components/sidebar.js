@@ -11,9 +11,9 @@ import {
 import { LayoutDashboard, Package, Terminal } from "lucide-react";
 
 const LinkItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "Package", icon: Package },
-  { name: "Console", icon: Terminal },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { name: "Package", icon: Package, href: "#" },
+  { name: "Console", icon: Terminal, href: "#" },
 ];
 
 export default function SimpleSidebar({ children }) {
@@ -41,16 +41,16 @@ const SidebarContent = ({ ...rest }) => {
       {...rest}
     >
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} />
+        <NavItem key={link.name} icon={link.icon} href={link.href} />
       ))}
     </Flex>
   );
 };
 
-const NavItem = ({ icon }) => {
+const NavItem = ({ icon, href }) => {
   return (
     <Link
-      href="#"
+      href={href}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >

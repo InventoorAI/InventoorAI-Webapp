@@ -14,30 +14,31 @@ import WidgetLayout from "./WidgetLayout";
 import { v4 } from "uuid";
 import Item from "@/../public/InventoryItem.png"
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Inventory({ ...style }) {
-  const siteAData = [
-    {
-      name: "item 1",
-      dimension: "10x20x40",
-      weight: 1.5
-    },
-    {
-      name: "item 2",
-      dimension: "10x20x40",
-      weight: 2.5
-    },
-    {
-      name: "item 3",
-      dimension: "10x20x40",
-      weight: 3.5
-    },
-    {
-      name: "item 4",
-      dimension: "10x20x40",
-      weight: 4.5
-    },
-  ]
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get('http://192.168.145.251:3000/api/items', {
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        console.log(response);
+        const result = await response.json()
+        console.log(result)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchItems()
+  }, [])
 
   return (
     <WidgetLayout icon={<Boxes />} title={"Inventory"} {...style}>
@@ -56,7 +57,7 @@ export default function Inventory({ ...style }) {
 
         <TabPanels bg="#54cbc9">
           <TabPanel overflowY="scroll" maxHeight="22vh" py={0}>
-            {siteAData.map((data) => (
+            {items.map((data) => (
               <Box py={2} borderBottomWidth="1px" overflow="hidden" w={'full'} h={'70px'} key={v4()} display={'flex'} flexDir={'row'} gap={2} color={'white'}>
                 <Image src={Item} alt="item image" />
                 <Flex flexDir="column" justifyContent={"space-between"}>
