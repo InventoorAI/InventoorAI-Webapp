@@ -1,6 +1,7 @@
 import { Droplet } from "lucide-react";
 import { Chart } from "./Chart";
 import WidgetLayout from "./WidgetLayout";
+import { Box } from "@chakra-ui/react";
 
 export default function Humidity({ ...style }) {
   const data = {
@@ -17,7 +18,9 @@ export default function Humidity({ ...style }) {
 
   return (
     <WidgetLayout title={"Humidity"} icon={<Droplet />} {...style}>
-      <Chart data={data} />
+      <Box p={5}>
+        <Chart data={data} />
+      </Box>
     </WidgetLayout>
   );
 }

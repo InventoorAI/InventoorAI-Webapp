@@ -1,6 +1,7 @@
 import { Thermometer } from "lucide-react";
 import { Chart } from "./Chart";
 import WidgetLayout from "./WidgetLayout";
+import { Box } from "@chakra-ui/react";
 
 export default function Temperature({ ...style }) {
   const data = {
@@ -17,7 +18,9 @@ export default function Temperature({ ...style }) {
 
   return (
     <WidgetLayout title={"Temperature"} icon={<Thermometer />} {...style}>
-      <Chart data={data} />
+      <Box p={5}>
+        <Chart data={data} />
+      </Box>
     </WidgetLayout>
   );
 }
