@@ -26,7 +26,7 @@ export default function Home() {
             <Control w="100%" />
           </VStack>
           <VStack w={{ base: "380px", md: "400px" }} gap="20px">
-            <WebCam w="100%" />
+            <WebCam w="100%" position="relative" />
             <Temperature w="100%" />
             <Humidity w="100%" />
           </VStack>
