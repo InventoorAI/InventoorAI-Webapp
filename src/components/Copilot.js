@@ -11,23 +11,40 @@ import { BotMessageSquare, SendHorizonal } from "lucide-react";
 import WidgetLayout from "./WidgetLayout";
 import Message from "./Message";
 import { v4 } from "uuid";
+import { useState, useEffect } from "react";
 
 export default function Copilot({ ...style }) {
-  const messages = [
-    { who: "human", msg: "Hello." },
-    { who: "ai", msg: "Hello John Doe! How may I help you today?" },
-    { who: "human", msg: "How's my inventory?" },
-    {
-      who: "ai",
-      msg: "Everything looks good. The temperature is 30°C, which is within the appropriate range. The humidity is slightly above average. Site A is 85% full, with Item 1 taking up the majority of space.",
-    },
-    { who: "human", msg: "Would you like me to do anything else?" },
-    {
-      who: "ai",
-      msg: "That's great. Could you please move Item 1 from Site A back to Site B?",
-    },
-    { who: "human", msg: "Moving Item 1 using Robot 1." },
-  ];
+  const[messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  const handleSendMessage = async () => {
+    if (!input.trim()) return;
+
+    const newMessage = { role: "user", context: input.trim() };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    try {
+      const response = await fetch("http://192.168.145.49:8000/testgpt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages,
+        }),
+      });
+
+      const data = await response.json();
+      setMessages((prevMessages) => [...prevMessages, 
+        {
+          role: "asssistant",
+          context: data.message,
+        }
+      ]);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   return (
     <WidgetLayout title={"Copilot"} icon={<BotMessageSquare />} {...style}>
@@ -43,7 +60,7 @@ export default function Copilot({ ...style }) {
           id="scrollbar"
         >
           {messages.map((msg) => (
-            <Message key={v4()} who={msg.who} message={msg.msg} />
+            <Message key={v4()} who={msg.role} message={msg.context} />
           ))}
         </Flex>
         <InputGroup pb="10px" pt="0" px="20px">
@@ -56,6 +73,7 @@ export default function Copilot({ ...style }) {
               borderColor: "none",
             }}
             p="10px"
+            onChange={(e) => setInput(e.target.value)}
           />
           <InputRightAddon
             bg="#edf2f7"
@@ -64,6 +82,7 @@ export default function Copilot({ ...style }) {
               backgroundColor: "#d9fffd",
               cursor: "pointer",
             }}
+            onClick={handleSendMessage}
           >
             <Center>
               <SendHorizonal color="#2f9694" />
