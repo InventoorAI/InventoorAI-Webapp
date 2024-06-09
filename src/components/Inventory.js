@@ -18,15 +18,16 @@ import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import axios from "axios";
 
-const socket = io(`ws://192.168.31.155:3000`)
-
 export default function Inventory({ ...style }) {
+  const socket = io(`ws://${process.env.NEXT_PUBLIC_DOMAIN}:3000`)
   const [items, setItems] = useState([])
 
+  socket.on('items', (data) => {
+    setItems(data)
+  })
+
   useEffect(() => {
-    socket.on('findAllItems', (data) => {
-      setItems(data)
-    })
+    socket.emit('items', { message: "anyting"})
   }, [])
 
 
