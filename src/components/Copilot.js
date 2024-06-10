@@ -1,7 +1,6 @@
 import {
   Flex,
   Input,
-  HStack,
   Box,
   InputGroup,
   InputRightAddon,
@@ -12,42 +11,33 @@ import WidgetLayout from "./WidgetLayout";
 import Message from "./Message";
 import { v4 } from "uuid";
 import { useState, useEffect } from "react";
+import { io } from "socket.io-client";
 
 export default function Copilot({ ...style }) {
-  const[messages, setMessages] = useState([]);
+  const socket = io(`ws://${process.env.NEXT_PUBLIC_DOMAIN}:3000`);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
   const handleSendMessage = async () => {
     if (!input.trim()) return;
+    console.log("input", input);
+    const newMessage = { role: "user", content: input.trim() };
+    socket.emit("chat", { messages: [...messages, newMessage] });
 
-    const newMessage = { role: "user", context: input.trim() };
     setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-    try {
-      const response = await fetch("http://192.168.145.49:8000/testgpt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages,
-        }),
-      });
-
-      const data = await response.json();
-      setMessages((prevMessages) => [...prevMessages, 
-        {
-          role: "asssistant",
-          context: data.message,
-        }
-      ]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+    // setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setInput("");
   };
 
+  socket.on("chat", (message) => {
+    const newMessage = { role: "assistant", content: message.message };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  });
+  // useEffect(() => {
+  // }, []);
+
   return (
-    <WidgetLayout title={"Copilot"} icon={<BotMessageSquare />} {...style}>
+    <WidgetLayout title={"Chatbot"} icon={<BotMessageSquare />} {...style}>
       <Box bg="#54cbc9">
         <Flex
           gap="11px"
@@ -60,7 +50,7 @@ export default function Copilot({ ...style }) {
           id="scrollbar"
         >
           {messages.map((msg) => (
-            <Message key={v4()} who={msg.role} message={msg.context} />
+            <Message key={v4()} who={msg.role} message={msg.content} />
           ))}
         </Flex>
         <InputGroup pb="10px" pt="0" px="20px">
@@ -73,6 +63,7 @@ export default function Copilot({ ...style }) {
               borderColor: "none",
             }}
             p="10px"
+            value={input}
             onChange={(e) => setInput(e.target.value)}
           />
           <InputRightAddon
